@@ -1,0 +1,56 @@
+body {
+    background-image: url(images/bg.jpg);
+    text-align: justify;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: small;
+    text-align: justify;
+    color: #555E4F;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+        text-align: center;
+        color: black;
+}
+
+
+a {
+    color: #666666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #555E4F;
+    text-decoration: none;
+}
+
+input[type="text"]
+{
+  background-color: #CDBA96
+}
+
+input[type="password"]
+{
+  background-color: #CDBA96
+}
+
+#fulladmin {
+  width: 100%
+  height: 100%
+}
+
+#adminleft {
+    float: left;
+    width: 20%;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    color: #323B2E;
+    background-color: #555E4F;
+}
+
+#adminright {
+    float: right;
+    width: 80%;
+    background-color: #CDCD96;
+}  
