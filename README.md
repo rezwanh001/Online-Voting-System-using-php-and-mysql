@@ -7,6 +7,7 @@ After registration, the voter is assigned a secret Voter ID with which he/she ca
 #### Installation : 
 
   Create a database "poll"
+  
   import poll.sql file from phpmyadmin
 
   ```ADMIN LOGIN DETAILS 
