@@ -88,8 +88,9 @@
 
   		$newpass = md5($myPassword); //This will make your password encrypted into md5, a high security hash
 
-  		$sql = mysql_query( "INSERT INTO tbMembers(first_name, last_name, email, voter_id, password) VALUES ('$myFirstName','$myLastName', '$myEmail','$myVoterid', '$newpass')" )
-  		        or die( mysql_error() );
+  		$sql = $mysqli->query( "INSERT INTO tbMembers(first_name, last_name, email, voter_id, password) VALUES ('$myFirstName','$myLastName', '$myEmail','$myVoterid', '$newpass')" )
+  		        or die( mysqli_error() );
+
 
   	die( "You have registered for an account.<br><br>Go to <a href=\"login.php\">Login</a>" );
   	}
