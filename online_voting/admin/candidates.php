@@ -4,16 +4,16 @@
     if(empty($_SESSION['admin_id'])){
       header("location:access-denied.php");
     } 
-    $result=mysql_query("SELECT * FROM tbCandidates")
-    or die("There are no records to display ... \n" . mysql_error()); 
-    if (mysql_num_rows($result)<1){
+    $result= $mysqli->query("SELECT * FROM tbCandidates")
+    or die("There are no records to display ... \n" . mysqli_error()); 
+    if (mysqli_num_rows($result)<1){
         $result = null;
     }
 ?>
 
 <?php
-    $positions_retrieved=mysql_query("SELECT * FROM tbPositions")
-    or die("There are no records to display ... \n" . mysql_error()); 
+    $positions_retrieved= $mysqli->query("SELECT * FROM tbPositions")
+    or die("There are no records to display ... \n" . mysqli_error()); 
 ?>
 
 <?php
@@ -24,8 +24,8 @@ if (isset($_POST['Submit']))
     $newCandidatePosition = addslashes( $_POST['position'] ); //prevents types of SQL injection
     
 
-    $sql = mysql_query( "INSERT INTO tbCandidates(candidate_name,candidate_position) VALUES ('$newCandidateName','$newCandidatePosition')" )
-            or die("Could not insert candidate at the moment". mysql_error() );
+    $sql = $mysqli->query( "INSERT INTO tbCandidates(candidate_name,candidate_position) VALUES ('$newCandidateName','$newCandidatePosition')" )
+            or die("Could not insert candidate at the moment". mysqli_error() );
 
     // redirect back to candidates
      header("Location: candidates.php");
@@ -41,7 +41,7 @@ if (isset($_POST['Submit']))
      $id = $_GET['id'];
      
      // delete the entry
-     $result = mysql_query("DELETE FROM tbCandidates WHERE candidate_id='$id'")
+     $result =  $mysqli->query("DELETE FROM tbCandidates WHERE candidate_id='$id'")
      or die("The candidate does not exist ... \n"); 
      
      // redirect back to candidates
@@ -140,7 +140,7 @@ if (isset($_POST['Submit']))
     <OPTION VALUE="select">select
     <?php
         //loop through all table rows
-        while ($row=mysql_fetch_array($positions_retrieved)){
+        while ($row= mysqli_fetch_array($positions_retrieved)){
           echo "<OPTION VALUE=$row[position_name]>$row[position_name]";
         }
     ?>
@@ -163,7 +163,7 @@ if (isset($_POST['Submit']))
 
 <?php
     //loop through all table rows
-    while ($row=mysql_fetch_array($result)){
+    while ($row= mysqli_fetch_array($result)){
     echo "<tr>";
     echo "<td>" . $row['candidate_id']."</td>";
     echo "<td>" . $row['candidate_name']."</td>";
@@ -171,8 +171,8 @@ if (isset($_POST['Submit']))
     echo '<td><a href="candidates.php?id=' . $row['candidate_id'] . '">Delete Candidate</a></td>';
     echo "</tr>";
     }
-    mysql_free_result($result);
-    mysql_close($link);
+    mysqli_free_result($result);
+    mysqli_close($mysqli);
 ?>
 
 </table>
