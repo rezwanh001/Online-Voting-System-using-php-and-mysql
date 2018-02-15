@@ -1,9 +1,9 @@
 <?php
-		require('connection.php');
+		require_once('connection.php');
 		$vote = $_REQUEST['vote'];
 
 
-		mysql_query("UPDATE tbCandidates SET candidate_cvotes=candidate_cvotes+1 WHERE candidate_name='$vote'");
+		$mysqli->query("UPDATE tbCandidates SET candidate_cvotes=candidate_cvotes+1 WHERE candidate_name='$vote'");
 
-		mysql_close($con);
+		mysqli_close($mysqli);
 ?> 
