@@ -21,19 +21,19 @@ $encrypted_mypassword=md5($mypassword);
 
 $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
-$myusername = mysql_real_escape_string($myusername);
-$mypassword = mysql_real_escape_string($mypassword);
+$myusername = $mysqli->escape_string($_POST['myusername']);
+$mypassword = $mysqli->escape_string($_POST['mypassword']);
 
 $sql="SELECT * FROM $tbl_name WHERE email='$myusername' and password='$encrypted_mypassword'" or die(mysql_error());
-$result=mysql_query($sql) or die(mysql_error());
+$result= $mysqli->query($sql);
 
 
-$count=mysql_num_rows($result);
+$count=mysqli_num_rows($result);
 
 
 if($count==1){
-    // $user = mysql_fetch_assoc($result);
-    //                 $_SESSION['admin_id'] = $user['admin_id'];
+    // $user = $result->fetch_assoc();
+    // $_SESSION['admin_id'] = $user['admin_id'];
     
                 if(isset($_POST['remember']))
                 {
@@ -42,7 +42,7 @@ if($count==1){
                     $_SESSION['curname']=$myusername;
                     $_SESSION['curpass']=$mypassword;
 
-                    $user = mysql_fetch_assoc($result);
+                    $user = $result->fetch_assoc();
      				$_SESSION['admin_id'] = $user['admin_id'];
 
                     header("Location:admin.php");
@@ -55,7 +55,7 @@ if($count==1){
                     $_SESSION['curname']=$myusername;
                     $_SESSION['curpass']=$mypassword;
 
-                    $user = mysql_fetch_assoc($result);
+                    $user = $result->fetch_assoc();
      				$_SESSION['admin_id'] = $user['admin_id'];
 
                     header("Location:admin.php");
