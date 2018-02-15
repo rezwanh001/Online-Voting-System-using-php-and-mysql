@@ -100,7 +100,7 @@
 			ob_start();
 
 			session_start();
-			require('connection.php');
+			require_once('connection.php');
 
 			// Defining your login details into variables
 			$myusername=$_POST['myusername'];
@@ -110,19 +110,19 @@
 			// MySQL injection protections
 			$myusername = stripslashes($myusername);
 			$mypassword = stripslashes($mypassword);
-			$myusername = mysql_real_escape_string($myusername);
-			$mypassword = mysql_real_escape_string($mypassword);
+			$myusername = $mysqli->escape_string($_POST['myusername']);
+			$mypassword = $mysqli->escape_string($_POST['mypassword']);
 
-			$sql="SELECT * FROM tbmembers WHERE email='$myusername' and password='$encrypted_mypassword'" or die(mysql_error());
-			$result=mysql_query($sql) or die(mysql_error());
+			$sql="SELECT * FROM tbmembers WHERE email='$myusername' and password='$encrypted_mypassword'" or die(mysqli_error());
+			$result= $mysqli->query($sql) or die(mysqli_error());
 
 			// Checking table row
-			$count=mysql_num_rows($result);
+			$count=mysqli_num_rows($result);
 			// If username and password is a match, the count will be 1
 
 			if($count==1){
 				// If everything checks out, you will now be forwarded to voter.php
-				$user = mysql_fetch_assoc($result);
+				$user = mysqli_fetch_assoc($result);
 				$_SESSION['member_id'] = $user['member_id'];
 				header("location:voter.php");
 			}
