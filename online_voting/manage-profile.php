@@ -7,12 +7,12 @@
       header("location:access-denied.php");
     } 
     //retrive voter details from the tbmembers table
-    $result=mysql_query("SELECT * FROM tbMembers WHERE member_id = '$_SESSION[member_id]'")
-    or die("There are no records to display ... \n" . mysql_error()); 
-    if (mysql_num_rows($result)<1){
+    $result= $mysqli->query("SELECT * FROM tbMembers WHERE member_id = '$_SESSION[member_id]'")
+    or die("There are no records to display ... \n" . mysqli_error()); 
+    if (mysqli_num_rows($result)<1){
         $result = null;
     }
-    $row = mysql_fetch_array($result);
+    $row = mysqli_fetch_array($result);
     if($row)
      {
          // get data from db
@@ -36,8 +36,8 @@
 
         $newpass = md5($myPassword); //This will make your password encrypted into md5, a high security hash
 
-        $sql = mysql_query( "UPDATE tbMembers SET first_name='$myFirstName', last_name='$myLastName', email='$myEmail', voter_id = '$myVoterid', password='$newpass' WHERE member_id = '$myId'" )
-                or die( mysql_error() );
+        $sql = $mysqli->query( "UPDATE tbMembers SET first_name='$myFirstName', last_name='$myLastName', email='$myEmail', voter_id = '$myVoterid', password='$newpass' WHERE member_id = '$myId'" )
+                or die( mysqli_error() );
 
         // redirect back to profile
          header("Location: manage-profile.php");
