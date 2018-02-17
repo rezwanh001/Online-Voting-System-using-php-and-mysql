@@ -1,14 +1,14 @@
 <?php
-require('../connection.php');
+require_once('../connection.php');
 // retrieving candidate(s) results based on position
 if (isset($_POST['Submit'])){   
 
   $position = addslashes( $_POST['position'] );
   
-    $results = mysql_query("SELECT * FROM tbCandidates where candidate_position='$position'");
+    $results = $mysqli->query("SELECT * FROM tbCandidates where candidate_position='$position'");
 
-    $row1 = mysql_fetch_array($results); // for the first candidate
-    $row2 = mysql_fetch_array($results); // for the second candidate
+    $row1 = mysqli_fetch_array($results); // for the first candidate
+    $row2 = mysqli_fetch_array($results); // for the second candidate
       if ($row1){
       $candidate_name_1=$row1['candidate_name']; // first candidate name
       $candidate_1=$row1['candidate_cvotes']; // first candidate votes
@@ -24,8 +24,8 @@ if (isset($_POST['Submit'])){
 ?> 
 <?php
 // retrieving positions sql query
-$positions=mysql_query("SELECT * FROM tbPositions")
-or die("There are no records to display ... \n" . mysql_error()); 
+$positions= $mysqli->query("SELECT * FROM tbPositions")
+or die("There are no records to display ... \n" . mysqli_error()); 
 ?>
 <?php
 session_start();
@@ -116,7 +116,7 @@ if(empty($_SESSION['admin_id'])){
         <OPTION  VALUE="select"><p style="color:black";>select</p>
         <?php 
         //loop through all table rows
-        while ($row=mysql_fetch_array($positions)){
+        while ($row= mysqli_fetch_array($positions)){
           echo "<OPTION VALUE=$row[position_name]>$row[position_name]"; 
         }
         ?>
