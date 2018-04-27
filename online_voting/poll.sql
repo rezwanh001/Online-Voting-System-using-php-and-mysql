@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `tbpositions` (
 
 INSERT INTO `tbpositions` (`position_id`, `position_name`) VALUES
 (1, 'Chairman'),
-(2, 'Vice-Chairman')
+(2, 'Vice-Chairman'),
 (3, 'Secretary'),
 (4, 'Vice-Secretary'),
 (5, 'Organizing-Secretary'),
